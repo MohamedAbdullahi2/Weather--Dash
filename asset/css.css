@@ -40,6 +40,11 @@ header {
     height: 100px;
 }
 
+.row border {
+    background-color: azure;
+}
+
+
 .search-btn {
     color: white;
     background-color: rgb(53, 55, 73);

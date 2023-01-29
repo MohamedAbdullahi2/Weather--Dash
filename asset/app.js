@@ -6,6 +6,8 @@ const currentHeading = document.querySelector('#current-heading');
 const currentData = document.querySelector('#current-data');
 const currentIcon = document.querySelector('#current-icon');
 const forecastCards = document.querySelectorAll('.future-container');
+var forecastTitle = document.querySelector("#forecast");
+var forecastContainerEl = document.querySelector("#fiveday-container");
 
 const apiKey = '265a4fd3791280adfcfe116cfd6f86b2';
 
@@ -13,6 +15,7 @@ searchForm.addEventListener('submit', e => {
   e.preventDefault();
   const city = citySearch.value;
   getWeather(city);
+  forecastData(city)
 });
 
 function getWeather(city) {
@@ -38,17 +41,74 @@ function getWeather(city) {
 
 
 
-// const apiUrl = `api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid=${apikey}`;
+function forecastData (city) {
 
+const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+
+//const city = citySearch.value;
 // // // Fetch forescast weather data from API
-// fetch(apiUrl)
-//    .then(response => response.json())
-//    .then(data => {
+fetch(apiUrl)
+.then(function(response){
+  response.json().then(function(data){
+     display5Day(data);
+  });
+});
+};
 
-//     console.log(data)
+var display5Day = function(weather){
+forecastContainerEl.textContent = ""
+forecastTitle.textContent = "5-Day Forecast:";
 
-// for (let i = 0; i < 5; i++) {
+var forecast = weather.list;
+  for(var i=5; i < forecast.length; i=i+8){
+ var dailyForecast = forecast[i];
+  
+ 
+ var forecastEl=document.createElement("div");
+ forecastEl.classList = "card bg-primary text-light m-2";
 
-// //console.log(data.list[i])
-// }})
+ //console.log(dailyForecast)
 
+ //create date element
+ var forecastDate = document.createElement("h5")
+ forecastDate.textContent= moment.unix(dailyForecast.dt).format("MMM D, YYYY");
+ forecastDate.classList = "card-header text-center"
+ forecastEl.appendChild(forecastDate);
+
+ 
+ //create an image element
+ var weatherIcon = document.createElement("img")
+ weatherIcon.classList = "card-body text-center";
+ weatherIcon.setAttribute("src", `https://openweathermap.org/img/wn/${dailyForecast.weather[0].icon}@2x.png`);  
+
+ //append to forecast card
+ forecastEl.appendChild(weatherIcon);
+ 
+ //create temperature span
+ var forecastTempEl=document.createElement("span");
+ forecastTempEl.classList = "card-body text-center";
+ forecastTempEl.textContent = "Temp: " + dailyForecast.main.temp + " °C";
+
+  //append to forecast card
+  forecastEl.appendChild(forecastTempEl);
+
+ var forecastHumEl=document.createElement("span");
+ forecastHumEl.classList = "card-body text-center";
+ forecastHumEl.textContent = "Humidity:" + dailyForecast.main.humidity + "  %";
+
+ //append to forecast card
+ forecastEl.appendChild(forecastHumEl);
+
+
+ var forecastWinEl=document.createElement("span");
+ forecastWinEl.classList = "card-body text-center";
+ forecastWinEl.textContent = "Wind:" + dailyForecast.wind.speed + " Kph";
+
+ forecastEl.appendChild(forecastWinEl)
+  // console.log(forecastEl);
+ //append to five day container
+  forecastContainerEl.appendChild(forecastEl);
+}
+
+}
+display5Day()
