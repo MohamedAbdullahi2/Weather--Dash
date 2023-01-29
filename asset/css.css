@@ -1,0 +1,60 @@
+body{
+background-image: url(./android-1080x1920-wallpaper_02906.jpg);
+background-repeat: no-repeat;
+background-size: cover;
+}
+
+header {
+    height: 110px;
+    background-color: rgb(86, 115, 182);
+    color: antiquewhite;
+    align-content: center;
+    font-family:
+}
+
+.future-container{
+    border-radius: 10px;
+    padding: 7px;
+
+}
+
+#current-data {
+
+    color: blue;
+    font-weight: bolder;
+}
+
+
+#current-weather {
+    background-color: white;
+    border: 1px solid;
+    border-radius: 10px;
+ 
+}
+#current-icon {
+    text-align: center;
+}
+
+#current-icon img{
+    width: 100px;
+    height: 100px;
+}
+
+.search-btn {
+    color: white;
+    background-color: rgb(53, 55, 73);
+    border-radius: 5px;
+    padding: 5px;
+    margin: 10px;
+    text-align: center;
+}
+
+.search-btn:hover {
+    background-color: rgb(16, 26, 169);
+}
+
+@media (min-width: 1200px) {
+    .col-9 .row {
+        margin-right: -15px!important;
+    }
+}
