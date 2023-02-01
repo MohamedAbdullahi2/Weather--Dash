@@ -35,7 +35,7 @@ THEN I am again presented with current and future conditions for that city
 
 
 
-Deployed URl :- 
+Deployed URl :- https://mohamedabdullahi2.github.io/Weather--Dash/
 
 Github Respo Url :- https://github.com/MohamedAbdullahi2/Weather--Dash.git 
 
