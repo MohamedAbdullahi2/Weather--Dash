@@ -66,3 +66,19 @@ header {
 @media (min-width: 1200px) {
     
 }
+
+ #search-container {
+ display:inline-flexbox;
+ margin-right: 100px;
+ width: 270px;
+ justify-content: center;
+ align-items: center;
+ text-align: center;
+ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ color: azure;
+ background-color:rgb(68, 85, 236);
+ border-radius: 10px;
+
+ }           
+                
+            
