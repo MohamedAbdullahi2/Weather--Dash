@@ -25,9 +25,9 @@ function getWeather(city) {
       // update current weather heading
       currentHeading.textContent = `Current Weather in ${data.name}`;
       // update current weather data
-      currentData.querySelector('#temp').textContent = `Temp: ${data.main.temp}`;
-      currentData.querySelector('#wind').textContent = `Wind: ${data.wind.speed}`;
-      currentData.querySelector('#humid').textContent = `Humidity: ${data.main.humidity}`;
+      currentData.querySelector('#temp').textContent = `Temp: ${data.main.temp} C`;
+      currentData.querySelector('#wind').textContent = `Wind: ${data.wind.speed} Kph`;
+      currentData.querySelector('#humid').textContent = `Humidity: ${data.main.humidity} %`;
       // update current weather icon
       currentIcon.innerHTML = `<img src="http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png">`;
       // add city to search history
