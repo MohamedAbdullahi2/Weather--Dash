@@ -5,18 +5,20 @@ const currentHeading = document.querySelector('#current-heading');
 const currentData = document.querySelector('#current-data');
 const currentIcon = document.querySelector('#current-icon');
 const forecastCards = document.querySelectorAll('.future-container');
-var forecastTitle = document.querySelector("#forecast");
-var forecastContainerEl = document.querySelector("#fiveday-container");
-var searched = document.querySelector('.history')
+let forecastTitle = document.querySelector("#forecast");
+let forecastContainerEl = document.querySelector("#fiveday-container");
 
 const apiKey = '265a4fd3791280adfcfe116cfd6f86b2';
+
+const cities = [];
 
 searchForm.addEventListener('submit', e => {
 e.preventDefault();
 const city = citySearch.value;
 localStorage.setItem("city", city);
 getWeather(city);
-forecastData(city)
+forecastData(city);
+addCityToHistory(city);
 });
 
 const storedCity = localStorage.getItem("city");
@@ -36,8 +38,31 @@ forecastData(e.target.textContent);
 
 });
 
+const storedCities = JSON.parse(localStorage.getItem('cities'));
+if (storedCities) {
+  cities.push(...storedCities);
+}
+
+
+
+cities.forEach(city => {
+  const cityItem = document.createElement("p");
+  cityItem.textContent = city;
+  searchContainer.appendChild(cityItem);
+});
+
+function addCityToHistory(city) {
+  cities.push(city);
+  localStorage.setItem('cities', JSON.stringify(cities));
+  const historyContainer = document.querySelector('.history');
+  const cityP = document.createElement("p");
+  cityP.textContent = city;
+  historyContainer.appendChild(cityP);
+}
+
 function getWeather(city) {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
+    
+  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
       .then(response => response.json())
       .then(data => {
         // update current weather heading
